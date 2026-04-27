@@ -1,0 +1,159 @@
+
+/* Our trade dress colour */
+:root {
+    --rw-blue: #0066cc;
+}
+
+/* Overrides */
+.btn-primary {
+    background-color: var(--rw-blue);
+    border-color: var(--rw-blue);
+}
+.btn-primary:hover {
+    background-color: #0052a3;
+    border-color: #0052a3;
+}
+
+
+/* Sidebar */
+.sidebar {
+    position: sticky;
+    top: 0;
+    height: calc(100vh - 48px);
+    overflow-y: auto;
+    padding: 15px;
+}
+
+/* Map */
+#map {
+    width: 100%;
+    height: calc(100vh - 130px);
+    min-height: 400px;
+}
+
+/* Legend colour boxes  */
+.color-box {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    flex-shrink: 0;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin: 8px 0;
+}
+
+/* Month slider tick labels */
+#monthSlider {
+    width: 100%;
+    accent-color: var(--rw-blue);
+    display: block;
+}
+
+.month-control {
+    width: 100%;
+}
+.month-numbers {
+    display: flex;
+    justify-content: space-between;
+}
+.month-numbers span {
+    font-size: 10px;
+    color: #888;
+}
+
+/* Info box */
+.info-box {
+    background-color: white;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Footer */
+.footer {
+    margin-top: 20px;
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+}
+
+
+
+
+/* Adjustments for mobile screens */
+@media (max-width: 767px) {
+    #map {
+        height: 60vw;
+        min-height: 300px;
+    }
+    .sidebar {
+        height: auto;
+        position: relative;
+    }
+}
+
+/* Style adjustments for the about page */
+
+.vision-quote {
+    border-left: 4px solid var(--rw-blue);
+    padding-left: 1.25rem;
+}
+
+.scenario-banner {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    background-color: #cc3300;
+    color: white;
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    pointer-events: none;
+}
+
+.col-lg-6 img {
+    max-height: 500px;
+    width: 100%;
+    object-fit: contain; /* Keeps the graph from stretching */
+    background-color: #fff;
+}
+
+.map-legend {
+    position: absolute;
+    bottom: 70px;
+    right: 40px;
+    background: white;
+    padding: 18px 30px;
+    border-radius: 8px;
+    font-size: 13px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    z-index: 5;
+}
+
+.map-legend .box {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+}
+
+.red { background: red; }
+.yellow { background: yellow; }
+.green { background: green; }
+.blue {
+    background: #4444ff;
+    border-radius: 50%;
+}
+.purple {
+    background: #a020f0; 
+    border-radius: 50%;
+}

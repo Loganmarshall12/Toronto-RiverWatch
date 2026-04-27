@@ -1,0 +1,240 @@
+﻿<!--
+ScriptName: index.html
+Group Members: Logan, Shaiza, and Miranda
+Date: 2026-03-17
+Vers     Date               Coder               Notes
+0.1      2026-03-17         Miranda             Initial file - Created Page for Information about the project
+1.0      2026-03-17         Miranda             Added three different sections for introduction, overview,and methodology
+2.0      2026-04-02         Shaiza              Added what if scenario explanation in methodology
+2.1      2026-04-02         Miranda             Added explanation and graph of 100 year storm section
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Based on Bootstrap Heroes and Features example templates -->
+    <!-- https://getbootstrap.com/docs/5.3/examples/heroes/ -->
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/features/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlaidPython - Toronto RiverWatch</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Our Own Style Sheet With overrides -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Insert your own Javascript google maps API key below -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7MovpyIVE5lJSZB3AtY8QhIA-dzBvmmY"></script>
+</head>
+
+
+<body>
+
+    <!-- Navbar from index page so all match -->
+
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Toronto RiverWatch</a>
+        <!-- Mobile sidebar toggle - from Bootstrap dashboard template -->
+        <button class="navbar-toggler d-md-none me-2" type="button"
+                data-bs-toggle="collapse" data-bs-target="#sidebar"
+                aria-controls="sidebar" aria-label="Toggle sidebar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <span class="navbar-text text-white-50 px-3 d-none d-md-block small">Flood Risk Visualization - Sprint 4</span>
+
+        <a href="index.html" class="btn btn-outline-light btn-sm me-2 ms-auto">Return To Map</a> <!-- Links back to the map -->
+        <button class="btn btn-outline-light btn-sm me-3" data-bs-toggle="modal" data-bs-target="#aboutModal">The Authors</button> <!-- Prompts Authors Modal -->
+
+    </nav>
+
+    <!-- Div Class From Heroes template -->
+    <div class="bg-dark text-secondary px-4 py-5 text-center" style="border-top: 3px solid #0066cc;">
+        <div class="py-5">
+            <h1 class="display-5 fw-bold text-white">What is Toronto RiverWatch?</h1>
+            <div class="col-lg-6 mx-auto">
+                <p class="fs-5 mb-4">A map-based flood risk visualization tool for Toronto that aggregates environmental data to compare relative flood risk across neighbourhoods.</p>
+                <blockquote class="blockquote fst-italic vision-quote mt-3">
+                    <p style="color: #a8c8f0;">"To create a Toronto where residents and visitors are empowered with clear, accessible information about flood risk, enabling informed decisions that help protect lives, property, and communities."</p>
+                    <footer class="blockquote-footer mt-2" style="color: #a8c8f0;">Project Vision Statement</footer>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+
+    <!-- Container from Features Template -->
+    <div class="container px-4 py-5">
+        <h2 class="pb-2 border-bottom">The Whys and Hows</h2>
+        <p class="text-muted mb-0">Flood risk data exists across multiple sources but is difficult to interpret or compare at a neighbourhood scale. Changes in environmental factors can increase flood risk over time — RiverWatch brings it all together.</p>
+        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+            <div class="feature col">
+                <h2>What it does</h2>
+                <p>Visualizes monthly flood risk using choropleth maps. Integrates precipitation and river gauge data, overlays regulated floodplain boundaries, and allows month-by-month scenario comparison.</p>
+            </div>
+            <div class="feature col">
+                <h2>How it works</h2>
+                <p>Environmental data is collected — precipitation, river flow, floodplain boundaries. Neighbourhoods are linked to their nearest monitoring stations and a risk score is calculated combining these factors.</p>
+            </div>
+            <div class="feature col">
+                <h2>Data sources</h2>
+                <p>Toronto Open Data, Toronto and Region Conservation Authority (TRCA), and Environment Canada.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Container from Features Template -->
+    <div class="container-fluid px-4 py-5 bg-light">
+        <div class="container">
+            <h2 class="pb-2 border-bottom">Methodology</h2>
+            <p class="text-muted">Each neighbourhood receives a risk score between 0.0 and 1.0, calculated monthly from real monitored data. In <strong>Sprint 4</strong> we added interactive “What‑If” scenario sliders that let you explore how changes in policy, land use, or climate could affect flood risk across Toronto.</p>
+
+            <div class="row g-4 py-5 row-cols-1 row-cols-lg-2">
+                <div class="feature col">
+                    <h4>Base risk formula</h4>
+                    <p>Each factor is weighted by its relative importance to flood risk:</p>
+                    <code>Risk = Base + (Flow × 0.30) + (Rain × 0.20) + Floodplain (0.20)</code>
+                    <ul class="mt-3">
+                        <li><strong>Base risk</strong> – Baseline value assigned per neighbourhood</li>
+                        <li><strong>River flow (30%)</strong> – Weighted effect from nearby river gauge data</li>
+                        <li><strong>Precipitation (20%)</strong> – Weighted effect from monthly rainfall totals</li>
+                        <li><strong>Floodplain bonus (20%)</strong> – Added if neighbourhood intersects a regulated floodplain</li>
+                    </ul>
+                    <p class="text-muted small mt-2">Final score is capped between 0.0 and 1.0. Missing station data falls back to neighbourhood or city‑wide averages.</p>
+                </div>
+                <div class="feature col">
+                    <h4>What‑If scenario sliders</h4>
+                    <p>On the main map, use the three sliders to simulate changes:</p>
+                    <ul>
+                        <li><strong>Policy Multiplier</strong> – Models stricter (↓) or laxer (↑) floodplain regulations. Range 0.5–1.5.</li>
+                        <li><strong>Greenery / Land‑Use</strong> – Simulates more green infrastructure (↓ risk) or more pavement (↑ risk). Range 0.5–1.5.</li>
+                        <li><strong>Climate Multiplier</strong> – Represents wetter (↑) or drier (↓) future climate patterns. Range 0.5–1.5.</li>
+                    </ul>
+                    <p>Adjusted risk is calculated as:</p>
+                    <code>AdjustedRisk = clamp(OriginalRisk × Policy × LandUse × Climate, 0, 1)</code>
+                    <p class="text-muted small mt-2">Click <strong>Apply Scenario</strong> to see the map update instantly. <strong>Reset</strong> returns to real measured risk.</p>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col">
+                    <h4>Risk categories</h4>
+                    <p>
+                        <span class="badge rounded-pill" style="background:#ffe5e5; color:#a32d2d;">High Risk (0.7 – 1.0)</span>
+                        <span class="badge rounded-pill mx-2" style="background:#fff8d6; color:#7a6000;">Medium Risk (0.4 – 0.7)</span>
+                        <span class="badge rounded-pill" style="background:#e6f4e6; color:#1a5c1a;">Low Risk (0.0 – 0.4)</span>
+                    </p>
+                    <p class="text-muted small">These colours update dynamically when you apply a scenario, helping you visualise how policy or climate changes could shift flood risk across Toronto neighbourhoods.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Container from Features Template -->
+    <div class="container-fluid px-4 py-5 bg-light">
+        <div class="container">
+            <h2 class="pb-2 border-bottom">100 Year Storm Scenario</h2>
+            <p class="text-muted">
+                This scenario simulates a major flood event based on Environment and Climate Change Canada (ECCC) Intensity-Duration-Frequency (IDF) statistics.
+            </p>
+
+            <div class="row g-5 py-5 align-items-center">
+                <div class="col-lg-6">
+                    <div class="card shadow-sm border-0">
+                        <img src="images/100yearstormgraph.jpg" class="img-fluid rounded" alt="Toronto 100-Year Storm IDF Graph">
+                        <div class="card-body bg-white">
+                            <p class="card-text small text-muted italic">
+                                Figure 1: ECCC IDF statistics showing the 97.3mm 24-hour rainfall threshold for Toronto (Update 2021).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <h4 class="fw-bold">The Hydrology Logic</h4>
+                    <p>
+                        Our calculation models how a 100-year storm (approx. 97.3mm of rainfall over 24 hours) interacts with Toronto's unique urban landscape. We use a weighted multi-factor formula to determine localized risk:
+                    </p>
+
+                    <div class="p-3 mb-3 rounded" style="background: #e9ecef; border-left: 4px solid var(--rw-blue);">
+                        <code class="d-block mb-2 text-dark fw-bold" style="font-size: 0.9rem;">
+                            Risk = Base + (Flow * 3.5 * 0.30) + (Rain * 1.6 * 0.20) + 0.25*
+                        </code>
+                    </div>
+
+                    <ul class="list-unstyled">
+                        <li class="mb-3">
+                            <strong><i class="bi bi-droplets-fill text-primary"></i> Precipitation (1.6× Multiplier):</strong>
+                            Toronto’s median 24-hour event is ~60mm. The 100-year storm of 97mm represents a <strong>1.6×</strong> increase over baseline rainfall totals.
+                        </li>
+                        <li class="mb-3">
+                            <strong><i class="bi bi-water text-primary"></i> River Flow (3.5× Multiplier):</strong>
+                            Due to high impervious surface coverage (pavement), runoff is amplified. We apply a <strong>3.5×</strong> multiplier to gauge data to reflect efficient water transport into the river systems.
+                        </li>
+                        <li class="mb-3">
+                            <strong><i class="bi bi-geo-alt-fill text-primary"></i> Floodplain Bonus (+0.25):</strong>
+                            A flat risk addition is applied to any neighborhood intersecting a regulated floodplain, as these areas face inherent structural risk regardless of current rainfall.
+                        </li>
+                    </ul>
+
+                    <p class="small text-muted">
+                        <em>Source: ECCC Engineering Cityfloodmap Climate Datasets & IDF Statistics (climate.weather.gc.ca).</em>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap modal template to create a pop out about the authors page -->
+    <div class="modal fade" id="aboutModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">About the Authors</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+
+                        <div class="col-md-4">
+                            <div class="card h-100 text-center p-3">
+                                <img src="images/shaiza.jfif" class="rounded-circle mx-auto mb-3" width="80" height="80" alt="Shaiza Khawaja" onerror="this.style.display='none'">
+                                <h6 class="mb-0">Shaiza Khawaja</h6>
+                                <small class="text-muted">Student #: 1307447</small>
+                                <p class="mt-2 small text-muted">BSc Environmental Health &amp; Safety, Abu Dhabi University.<br>MSc Risk, Crisis &amp; Disaster Management, University of Leicester.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card h-100 text-center p-3">
+                                <img src="images/logan.jfif" class="rounded-circle mx-auto mb-3" width="80" height="80" alt="Logan Marshall" onerror="this.style.display='none'">
+                                <h6 class="mb-0">Logan Marshall</h6>
+                                <small class="text-muted">Student #:1344745</small>
+                                <p class="mt-2 small text-muted">BA Geographic Information Science, Western University.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card h-100 text-center p-3">
+                                <img src="images/miranda.jfif" class="rounded-circle mx-auto mb-3" width="80" height="80" alt="Miranda Gilbert" onerror="this.style.display='none'">
+                                <h6 class="mb-0">Miranda Gilbert</h6>
+                                <small class="text-muted">Student #:0890705</small>
+                                <p class="mt-2 small text-muted">BEng Civil Engineering, Lakehead University.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>     <!-- Bootstrap JS -->
+
+
+</body>
+</html>
